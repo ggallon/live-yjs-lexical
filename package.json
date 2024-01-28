@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@lexical/react": "0.13.1",
+    "@lexical/yjs": "^0.13.1",
     "@liveblocks/client": "1.9.7",
     "@liveblocks/node": "1.9.7",
     "@liveblocks/react": "1.9.7",
