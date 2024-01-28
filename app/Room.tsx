@@ -9,7 +9,7 @@ import { Loading } from "@/components/Loading";
 import { RoomProvider } from "@/liveblocks.config";
 
 export function Room({ children }: { children: ReactNode }) {
-  const roomId = useOverrideRoomId("nextjs-yjs-slate");
+  const roomId = useOverrideRoomId("nextjs-yjs-notes");
 
   return (
     <RoomProvider

@@ -1,3 +1,5 @@
+import { Suspense } from "react";
+
 import { Room } from "@/app/Room";
 import CollaborativeEditor from "@/components/Editor";
 
@@ -8,9 +10,11 @@ export default function Page() {
     <main>
       <div className={styles.container}>
         <div className={styles.editorContainer}>
-          <Room>
-            <CollaborativeEditor />
-          </Room>
+          <Suspense fallback={<div>Loading... </div>}>
+            <Room>
+              <CollaborativeEditor />
+            </Room>
+          </Suspense>
         </div>
       </div>
     </main>
