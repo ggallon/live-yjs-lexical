@@ -28,7 +28,7 @@ const initialConfig = {
   // would indicate that the editor should not try to set any default state
   // (not even empty one), and let collaboration plugin do it instead
   editorState: null,
-  namespace: "Demo",
+  namespace: "Note",
   nodes: [],
   onError: (error: unknown) => {
     throw error;
@@ -53,7 +53,6 @@ function initialEditorState(editor: LexicalEditor): void {
 }
 
 // Collaborative text editor with simple rich text, live cursors, and live avatars
-
 export default function Editor() {
   // Get Liveblocks room, and user info from Liveblocks authentication endpoint
   const room = useRoom();
