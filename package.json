@@ -10,22 +10,22 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@lexical/react": "^0.11.1",
-    "@liveblocks/client": "^1.8.0",
-    "@liveblocks/node": "^1.8.0",
-    "@liveblocks/react": "^1.8.0",
-    "@liveblocks/yjs": "^1.8.0",
-    "@types/node": "^18.11.18",
-    "@types/react": "^18.0.27",
-    "@types/react-dom": "^18.0.10",
-    "lexical": "^0.11.1",
-    "next": "^13.5.4",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "typescript": "^5.2.2",
-    "yjs": "^13.6.4"
+    "@lexical/react": "0.13.1",
+    "@liveblocks/client": "1.9.7",
+    "@liveblocks/node": "1.9.7",
+    "@liveblocks/react": "1.9.7",
+    "@liveblocks/yjs": "1.9.7",
+    "lexical": "0.13.1",
+    "next": "14.1.1-canary.17",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "yjs": "13.6.11"
   },
   "devDependencies": {
-    "@iconify/react": "^4.1.0"
+    "@iconify/react": "4.1.1",
+    "@types/node": "20.11.10",
+    "@types/react": "18.2.48",
+    "@types/react-dom": "18.2.18",
+    "typescript": "5.3.3"
   }
 }
