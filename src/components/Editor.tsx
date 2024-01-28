@@ -1,23 +1,26 @@
 "use client";
 
+import { CollaborationPlugin } from "@lexical/react/LexicalCollaborationPlugin";
+import { ContentEditable } from "@lexical/react/LexicalContentEditable";
+import { LexicalComposer } from "@lexical/react/LexicalComposer";
+import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary";
+import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
+import { Provider } from "@lexical/yjs";
 import LiveblocksProvider from "@liveblocks/yjs";
-import * as Y from "yjs";
-import { useRoom, useSelf } from "@/liveblocks.config";
-import styles from "./Editor.module.css";
-import { Toolbar } from "@/components/Toolbar";
-import { Avatars } from "./Avatars";
 import {
   $createParagraphNode,
   $createTextNode,
   $getRoot,
   LexicalEditor,
 } from "lexical";
-import { LexicalComposer } from "@lexical/react/LexicalComposer";
-import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
-import { ContentEditable } from "@lexical/react/LexicalContentEditable";
-import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary";
-import { CollaborationPlugin } from "@lexical/react/LexicalCollaborationPlugin";
-import { Provider } from "@lexical/yjs";
+import * as Y from "yjs";
+
+import { Toolbar } from "@/components/Toolbar";
+import { Avatars } from "./Avatars";
+
+import { useRoom, useSelf } from "@/liveblocks.config";
+
+import styles from "./Editor.module.css";
 
 // Set up editor config and theme
 const initialConfig = {

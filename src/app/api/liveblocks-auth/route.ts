@@ -1,5 +1,5 @@
-import { Liveblocks } from "@liveblocks/node";
 import { NextRequest } from "next/server";
+import { Liveblocks } from "@liveblocks/node";
 
 // Authenticating your Liveblocks application
 // https://liveblocks.io/docs/rooms/authentication/access-token-permissions/nextjs

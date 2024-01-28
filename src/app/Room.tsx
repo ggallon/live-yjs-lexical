@@ -1,10 +1,12 @@
 "use client";
 
-import { ReactNode, useMemo } from "react";
-import { RoomProvider } from "@/liveblocks.config";
+import { useMemo, type ReactNode } from "react";
 import { useSearchParams } from "next/navigation";
 import { ClientSideSuspense } from "@liveblocks/react";
+
 import { Loading } from "@/components/Loading";
+
+import { RoomProvider } from "@/liveblocks.config";
 
 export function Room({ children }: { children: ReactNode }) {
   const roomId = useOverrideRoomId("nextjs-yjs-slate");

@@ -1,5 +1,6 @@
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { FORMAT_TEXT_COMMAND } from "lexical";
+
 import styles from "./Toolbar.module.css";
 
 // A toolbar with simple rich-text controls
