@@ -2,6 +2,8 @@ import { createClient } from "@liveblocks/client";
 import { createRoomContext } from "@liveblocks/react";
 import LiveblocksProvider from "@liveblocks/yjs";
 
+import type { UserInfo } from "@/fake/users";
+
 const client = createClient({
   authEndpoint: "/api/liveblocks-auth",
 });
@@ -28,11 +30,7 @@ type Storage = {
 // will not change during a session, like a User's name or avatar.
 type UserMeta = {
   id: string; // Accessible through `user.id`
-  info: {
-    name: string;
-    picture: string;
-    color: string;
-  }; // Accessible through `user.info`
+  info: UserInfo; // Accessible through `user.info`
 };
 
 // Optionally, the type of custom events broadcast and listened for in this
@@ -41,11 +39,10 @@ type UserMeta = {
 
 export const {
   suspense: { RoomProvider, useRoom, useOthers, useSelf },
-} = createRoomContext<Presence, Storage, UserMeta /*, RoomEvent */>(client);
+} = createRoomContext<Presence, Storage, UserMeta>(client);
 
 export type LiveblocksProviderType = LiveblocksProvider<
   Presence,
   Storage,
-  UserMeta,
-  {}
+  UserMeta
 >;
