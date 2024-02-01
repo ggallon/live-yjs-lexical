@@ -1,42 +1,129 @@
+import { useCallback, useEffect, useState } from "react";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
-import { FORMAT_TEXT_COMMAND } from "lexical";
+import { mergeRegister } from "@lexical/utils";
+import * as ToolbarUI from "@radix-ui/react-toolbar";
+import {
+  $getSelection,
+  $isRangeSelection,
+  COMMAND_PRIORITY_CRITICAL,
+  FORMAT_TEXT_COMMAND,
+  SELECTION_CHANGE_COMMAND,
+} from "lexical";
 
 import styles from "./Toolbar.module.css";
+
+function getTextFormatting(bold: boolean, italic: boolean, underline: boolean) {
+  const styleArray: Array<string> = [];
+  if (bold) {
+    styleArray.push("bold");
+  }
+
+  if (italic) {
+    styleArray.push("italic");
+  }
+
+  if (underline) {
+    styleArray.push("underline");
+  }
+
+  return styleArray.length > 0 ? styleArray : ["none"];
+}
 
 // A toolbar with simple rich-text controls
 export function Toolbar() {
   const [editor] = useLexicalComposerContext();
+  const [activeEditor, setActiveEditor] = useState(editor);
+  const [isBold, setIsBold] = useState(false);
+  const [isItalic, setIsItalic] = useState(false);
+  const [isUnderline, setIsUnderline] = useState(false);
+  const [isEditable, setIsEditable] = useState(() => editor.isEditable());
+  const textFormatting = getTextFormatting(isBold, isItalic, isUnderline);
+
+  const $updateToolbar = useCallback(() => {
+    const selection = $getSelection();
+    if ($isRangeSelection(selection)) {
+      // Update text format
+      setIsBold(selection.hasFormat("bold"));
+      setIsItalic(selection.hasFormat("italic"));
+      setIsUnderline(selection.hasFormat("underline"));
+    }
+  }, [activeEditor]);
+
+  useEffect(() => {
+    return editor.registerCommand(
+      SELECTION_CHANGE_COMMAND,
+      (_payload, newEditor) => {
+        $updateToolbar();
+        setActiveEditor(newEditor);
+        return false;
+      },
+      COMMAND_PRIORITY_CRITICAL
+    );
+  }, [editor, $updateToolbar]);
+
+  useEffect(() => {
+    return mergeRegister(
+      editor.registerEditableListener((editable) => {
+        setIsEditable(editable);
+      }),
+      activeEditor.registerUpdateListener(({ editorState }) => {
+        editorState.read(() => {
+          $updateToolbar();
+        });
+      })
+    );
+  }, [$updateToolbar, activeEditor, editor]);
 
   return (
-    <div className={styles.toolbar}>
-      <button
-        className={styles.button}
-        onClick={() => {
-          editor.dispatchCommand(FORMAT_TEXT_COMMAND, "bold");
-        }}
-        aria-label="Bold"
+    <ToolbarUI.Root
+      className={styles.root}
+      aria-label="Formatting options"
+      aria-controls="note-content"
+    >
+      <ToolbarUI.ToggleGroup
+        className={styles.toolbar}
+        type="multiple"
+        aria-label="Text formatting"
+        value={textFormatting}
       >
-        <BoldIcon />
-      </button>
-      <button
-        className={styles.button}
-        onClick={() => {
-          editor.dispatchCommand(FORMAT_TEXT_COMMAND, "italic");
-        }}
-        aria-label="Italic"
-      >
-        <ItalicIcon />
-      </button>
-      <button
-        className={styles.button}
-        onClick={() => {
-          editor.dispatchCommand(FORMAT_TEXT_COMMAND, "underline");
-        }}
-        aria-label="Underline"
-      >
-        <UnderlineIcon />
-      </button>
-    </div>
+        <ToolbarUI.ToggleItem
+          disabled={!isEditable}
+          className={styles.button}
+          onClick={() => {
+            activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, "bold");
+          }}
+          aria-label="Format text as bold."
+          aria-pressed={isBold}
+          value="bold"
+        >
+          <BoldIcon />
+        </ToolbarUI.ToggleItem>
+        <ToolbarUI.ToggleItem
+          disabled={!isEditable}
+          className={styles.button}
+          onClick={() => {
+            activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, "italic");
+          }}
+          aria-label="Format text as italics."
+          aria-pressed={isItalic}
+          value="italic"
+        >
+          <ItalicIcon />
+        </ToolbarUI.ToggleItem>
+        <ToolbarUI.ToggleItem
+          disabled={!isEditable}
+          className={styles.button}
+          onClick={() => {
+            activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, "underline");
+          }}
+          aria-label="Format text to underlined."
+          aria-pressed={isUnderline}
+          value="underline"
+        >
+          <UnderlineIcon />
+        </ToolbarUI.ToggleItem>
+      </ToolbarUI.ToggleGroup>
+    </ToolbarUI.Root>
   );
 }
 

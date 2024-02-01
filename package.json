@@ -11,13 +11,15 @@
   },
   "dependencies": {
     "@lexical/react": "0.13.1",
-    "@lexical/yjs": "^0.13.1",
+    "@lexical/utils": "0.13.1",
+    "@lexical/yjs": "0.13.1",
     "@liveblocks/client": "1.9.7",
     "@liveblocks/node": "1.9.7",
     "@liveblocks/react": "1.9.7",
     "@liveblocks/yjs": "1.9.7",
+    "@radix-ui/react-toolbar": "1.0.4",
     "lexical": "0.13.1",
-    "next": "14.1.1-canary.17",
+    "next": "14.1.1-canary.21",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "yjs": "13.6.11"

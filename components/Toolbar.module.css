@@ -1,3 +1,7 @@
+.root {
+  display: flex;
+}
+
 .toolbar {
   display: flex;
   padding: 1em;
@@ -15,12 +19,16 @@
   background: #fff;
   color: #1f2937;
   border: none;
-  box-shadow: rgba(0, 0, 0, 0.12) 0 4px 8px 0, rgba(0, 0, 0, 0.02) 0 0 0 1px;
+  box-shadow:
+    rgba(0, 0, 0, 0.12) 0 4px 8px 0,
+    rgba(0, 0, 0, 0.02) 0 0 0 1px;
 }
 
 .button:hover {
   color: #111827;
-  box-shadow: rgba(0, 0, 0, 0.16) 0 5px 8px 0, rgba(0, 0, 0, 0.04) 0 0 0 1px;
+  box-shadow:
+    rgba(0, 0, 0, 0.16) 0 5px 8px 0,
+    rgba(0, 0, 0, 0.04) 0 0 0 1px;
 }
 
 .button:focus-visible {
@@ -28,9 +36,11 @@
 }
 
 .button:active {
-  box-shadow: rgba(0, 0, 0, 0.16) 0 2px 3px 0, rgba(0, 0, 0, 0.04) 0 0 0 1px;
+  box-shadow:
+    rgba(0, 0, 0, 0.16) 0 2px 3px 0,
+    rgba(0, 0, 0, 0.04) 0 0 0 1px;
 }
 
-.button[data-active] {
-  background: #fafafa;
+.button[data-state="on"] {
+  background: #edeef0;
 }

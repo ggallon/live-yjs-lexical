@@ -15,8 +15,8 @@ import {
 } from "lexical";
 import * as Y from "yjs";
 
+import { Avatars } from "@/components/Avatars";
 import { Toolbar } from "@/components/Toolbar";
-import { Avatars } from "./Avatars";
 
 import { useRoom, useSelf } from "@/liveblocks.config";
 
@@ -44,7 +44,7 @@ const initialConfig = {
 };
 
 // Define initial editor state
-function initialEditorState(editor: LexicalEditor): void {
+function initialEditorState(): void {
   const root = $getRoot();
   const paragraph = $createParagraphNode();
   const text = $createTextNode();
@@ -67,7 +67,9 @@ export default function Editor() {
         </div>
         <div className={styles.editorContainer}>
           <RichTextPlugin
-            contentEditable={<ContentEditable className={styles.editor} />}
+            contentEditable={
+              <ContentEditable id="note-content" className={styles.editor} />
+            }
             placeholder={
               <p className={styles.placeholder}>Start typing here…</p>
             }
