@@ -19,15 +19,15 @@
     "@liveblocks/yjs": "1.9.7",
     "@radix-ui/react-toolbar": "1.0.4",
     "lexical": "0.13.1",
-    "next": "14.1.1-canary.21",
+    "next": "14.1.1-canary.27",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "yjs": "13.6.11"
   },
   "devDependencies": {
     "@iconify/react": "4.1.1",
-    "@types/node": "20.11.10",
-    "@types/react": "18.2.48",
+    "@types/node": "20.11.16",
+    "@types/react": "18.2.51",
     "@types/react-dom": "18.2.18",
     "typescript": "5.3.3"
   }
