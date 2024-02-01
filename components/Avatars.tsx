@@ -32,6 +32,7 @@ export function Avatar({ picture, name }: { picture: string; name: string }) {
   return (
     <div className={styles.avatar} data-tooltip={name}>
       <img
+        alt={name}
         src={picture}
         className={styles.avatar_picture}
         data-tooltip={name}

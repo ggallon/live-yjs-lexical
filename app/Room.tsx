@@ -1,8 +1,8 @@
 "use client";
 
-import { useMemo, type ReactNode } from "react";
-import { useSearchParams } from "next/navigation";
 import { ClientSideSuspense } from "@liveblocks/react";
+import { useSearchParams } from "next/navigation";
+import { type ReactNode, useMemo } from "react";
 
 import { Loading } from "@/components/Loading";
 

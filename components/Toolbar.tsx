@@ -1,4 +1,3 @@
-import { useCallback, useEffect, useState } from "react";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { mergeRegister } from "@lexical/utils";
 import * as ToolbarUI from "@radix-ui/react-toolbar";
@@ -9,6 +8,7 @@ import {
   FORMAT_TEXT_COMMAND,
   SELECTION_CHANGE_COMMAND,
 } from "lexical";
+import { useCallback, useEffect, useState } from "react";
 
 import { BoldIcon, ItalicIcon, UnderlineIcon } from "@/components/icons/format";
 
@@ -59,7 +59,7 @@ export function Toolbar() {
         setActiveEditor(newEditor);
         return false;
       },
-      COMMAND_PRIORITY_CRITICAL
+      COMMAND_PRIORITY_CRITICAL,
     );
   }, [editor, $updateToolbar]);
 
@@ -72,7 +72,7 @@ export function Toolbar() {
         editorState.read(() => {
           $updateToolbar();
         });
-      })
+      }),
     );
   }, [$updateToolbar, activeEditor, editor]);
 

@@ -1,8 +1,8 @@
 "use client";
 
 import { CollaborationPlugin } from "@lexical/react/LexicalCollaborationPlugin";
-import { ContentEditable } from "@lexical/react/LexicalContentEditable";
 import { LexicalComposer } from "@lexical/react/LexicalComposer";
+import { ContentEditable } from "@lexical/react/LexicalContentEditable";
 import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary";
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import { Provider } from "@lexical/yjs";
