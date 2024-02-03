@@ -1,16 +1,19 @@
 "use client";
 
 import { ClientSideSuspense } from "@liveblocks/react";
-import { useSearchParams } from "next/navigation";
-import { type ReactNode, useMemo } from "react";
+import type { ReactNode } from "react";
 
 import { Loading } from "@/components/Loading";
 
 import { RoomProvider } from "@/liveblocks.config";
 
-export function Room({ children }: { children: ReactNode }) {
-  const roomId = useOverrideRoomId("nextjs-yjs-notes");
-
+export function Room({
+  children,
+  roomId,
+}: {
+  children: ReactNode;
+  roomId: string;
+}) {
   return (
     <RoomProvider
       id={roomId}
@@ -23,19 +26,4 @@ export function Room({ children }: { children: ReactNode }) {
       </ClientSideSuspense>
     </RoomProvider>
   );
-}
-
-/**
- * This function is used when deploying an example on liveblocks.io.
- * You can ignore it completely if you run the example locally.
- */
-function useOverrideRoomId(roomId: string) {
-  const params = useSearchParams();
-  const roomIdParam = params.get("roomId");
-
-  const overrideRoomId = useMemo(() => {
-    return roomIdParam ? `${roomId}-${roomIdParam}` : roomId;
-  }, [roomId, roomIdParam]);
-
-  return overrideRoomId;
 }
