@@ -5,14 +5,9 @@ import { LexicalComposer } from "@lexical/react/LexicalComposer";
 import { ContentEditable } from "@lexical/react/LexicalContentEditable";
 import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary";
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
-import { Provider } from "@lexical/yjs";
+import type { Provider } from "@lexical/yjs";
 import LiveblocksProvider from "@liveblocks/yjs";
-import {
-  $createParagraphNode,
-  $createTextNode,
-  $getRoot,
-  LexicalEditor,
-} from "lexical";
+import { $createParagraphNode, $createTextNode, $getRoot } from "lexical";
 import * as Y from "yjs";
 
 import { Avatars } from "@/components/Avatars";
