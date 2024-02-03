@@ -19,6 +19,7 @@ export function Avatars() {
       {currentUser && (
         <div className="relative ml-8 first:ml-0">
           <Avatar
+            key={currentUser.connectionId}
             picture={currentUser.info.picture}
             name={currentUser.info.name}
           />
