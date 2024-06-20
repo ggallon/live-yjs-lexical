@@ -1,29 +1,19 @@
 "use client";
 
+import { RoomProvider } from "@liveblocks/react/suspense";
 import { ClientSideSuspense } from "@liveblocks/react";
-import type { ReactNode } from "react";
-
 import { Loading } from "@/components/Loading";
-
-import { RoomProvider } from "@/liveblocks.config";
 
 export function Room({
   children,
   roomId,
 }: {
-  children: ReactNode;
+  children: React.ReactNode;
   roomId: string;
 }) {
   return (
-    <RoomProvider
-      id={roomId}
-      initialPresence={{
-        cursor: null,
-      }}
-    >
-      <ClientSideSuspense fallback={<Loading />}>
-        {() => children}
-      </ClientSideSuspense>
+    <RoomProvider id={roomId}>
+      <ClientSideSuspense fallback={<Loading />}>{children}</ClientSideSuspense>
     </RoomProvider>
   );
 }

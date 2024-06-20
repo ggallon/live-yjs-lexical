@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Providers } from "@/app/Providers";
 
 import styles from "@/components/Editor.module.css";
 import "./globals.css";
@@ -17,7 +18,9 @@ export default function RootLayout({
       <body>
         <main>
           <div className={styles.container}>
-            <div className={styles.editorContainer}>{children}</div>
+            <div className={styles.editorContainer}>
+              <Providers>{children}</Providers>
+            </div>
           </div>
         </main>
       </body>

@@ -6,16 +6,18 @@ import { ContentEditable } from "@lexical/react/LexicalContentEditable";
 import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary";
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import type { Provider } from "@lexical/yjs";
-import LiveblocksProvider from "@liveblocks/yjs";
+import { useRoom, useSelf } from "@liveblocks/react/suspense";
+import { LiveblocksYjsProvider } from "@liveblocks/yjs";
 import { $createParagraphNode, $createTextNode, $getRoot } from "lexical";
 import * as Y from "yjs";
 
 import { Avatars } from "@/components/Avatars";
 import { Toolbar } from "@/components/Toolbar";
 
-import { useRoom, useSelf } from "@/liveblocks.config";
-
 import styles from "./Editor.module.css";
+import { useCallback } from "react";
+import { useEffect } from "react";
+import { useState } from "react";
 
 // Set up editor config and theme
 const initialConfig = {
@@ -47,11 +49,30 @@ function initialEditorState(): void {
   root.append(paragraph);
 }
 
+function getDocFromMap(id: string, yjsDocMap: Map<string, Y.Doc>): Y.Doc {
+  let doc = yjsDocMap.get(id);
+
+  if (doc === undefined) {
+    doc = new Y.Doc();
+    yjsDocMap.set(id, doc);
+  }
+
+  return doc;
+}
+
 // Collaborative text editor with simple rich text, live cursors, and live avatars
 export default function Editor() {
   // Get Liveblocks room, and user info from Liveblocks authentication endpoint
   const room = useRoom();
   const userInfo = useSelf((me) => me.info);
+
+  const providerFactory = useCallback(
+    (id: string, yjsDocMap: Map<string, Y.Doc>) => {
+      const doc = getDocFromMap(id, yjsDocMap);
+      return new LiveblocksYjsProvider(room, doc) as Provider;
+    },
+    [room]
+  );
 
   return (
     <div className={styles.container}>
@@ -74,13 +95,7 @@ export default function Editor() {
             id="yjs-plugin"
             cursorColor={userInfo.color}
             username={userInfo.name}
-            providerFactory={(id, yjsDocMap) => {
-              // Set up Liveblocks Yjs provider
-              const doc = new Y.Doc();
-              yjsDocMap.set(id, doc);
-              const provider = new LiveblocksProvider(room, doc) as Provider;
-              return provider;
-            }}
+            providerFactory={providerFactory}
             initialEditorState={initialEditorState}
             shouldBootstrap={true}
           />

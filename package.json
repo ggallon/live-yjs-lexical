@@ -1,7 +1,5 @@
 {
-  "name": "@liveblocks-examples/nextjs-yjs-lexical",
-  "description": "This example shows how to build a collaborative text editor with Liveblocks, Yjs, Lexical, and Next.js.",
-  "license": "Apache-2.0",
+  "name": "live-yjs-lexical",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -10,25 +8,24 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@lexical/react": "0.13.1",
-    "@lexical/utils": "0.13.1",
-    "@lexical/yjs": "0.13.1",
-    "@liveblocks/client": "1.9.7",
-    "@liveblocks/node": "1.9.7",
-    "@liveblocks/react": "1.9.7",
-    "@liveblocks/yjs": "1.9.7",
-    "@radix-ui/react-toolbar": "1.0.4",
-    "lexical": "0.13.1",
-    "next": "14.1.1",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "yjs": "13.6.11"
+    "@lexical/react": "0.16.0",
+    "@lexical/utils": "0.16.0",
+    "@lexical/yjs": "0.16.0",
+    "@liveblocks/client": "2.0.4",
+    "@liveblocks/node": "2.0.4",
+    "@liveblocks/react": "2.0.4",
+    "@liveblocks/yjs": "2.0.4",
+    "@radix-ui/react-toolbar": "1.1.0",
+    "lexical": "0.16.0",
+    "next": "14.2.4",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "yjs": "13.6.18"
   },
   "devDependencies": {
-    "@iconify/react": "4.1.1",
-    "@types/node": "20.11.16",
-    "@types/react": "18.2.52",
-    "@types/react-dom": "18.2.18",
-    "typescript": "5.3.3"
+    "@types/node": "20.14.6",
+    "@types/react": "18.3.3",
+    "@types/react-dom": "18.3.0",
+    "typescript": "5.4.5"
   }
 }
