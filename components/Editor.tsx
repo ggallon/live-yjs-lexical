@@ -71,7 +71,7 @@ export default function Editor() {
       const doc = getDocFromMap(id, yjsDocMap);
       return new LiveblocksYjsProvider(room, doc) as Provider;
     },
-    [room]
+    [room],
   );
 
   return (
