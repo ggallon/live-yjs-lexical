@@ -3,7 +3,7 @@
 import { CollaborationPlugin } from "@lexical/react/LexicalCollaborationPlugin";
 import { LexicalComposer } from "@lexical/react/LexicalComposer";
 import { ContentEditable } from "@lexical/react/LexicalContentEditable";
-import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary";
+import { LexicalErrorBoundary } from "@lexical/react/LexicalErrorBoundary";
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import type { Provider } from "@lexical/yjs";
 import { useRoom, useSelf } from "@liveblocks/react/suspense";
@@ -16,8 +16,6 @@ import { Toolbar } from "@/components/Toolbar";
 
 import styles from "./Editor.module.css";
 import { useCallback } from "react";
-import { useEffect } from "react";
-import { useState } from "react";
 
 // Set up editor config and theme
 const initialConfig = {
@@ -45,10 +43,12 @@ const initialConfig = {
 // Define initial editor state
 function initialEditorState(): void {
   const root = $getRoot();
-  const paragraph = $createParagraphNode();
-  const text = $createTextNode();
-  paragraph.append(text);
-  root.append(paragraph);
+  if (root.isEmpty()) {
+    const paragraph = $createParagraphNode();
+    const text = $createTextNode();
+    paragraph.append(text);
+    root.append(paragraph);
+  }
 }
 
 function getDocFromMap(id: string, yjsDocMap: Map<string, Y.Doc>): Y.Doc {

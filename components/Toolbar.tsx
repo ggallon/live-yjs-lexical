@@ -23,7 +23,7 @@ function getTextFormatting(
   bold: boolean,
   italic: boolean,
   strikethrough: boolean,
-  underline: boolean
+  underline: boolean,
 ) {
   const styleArray: Array<string> = [];
   if (bold) {
@@ -58,7 +58,7 @@ export function Toolbar() {
     isBold,
     isItalic,
     isStrikethrough,
-    isUnderline
+    isUnderline,
   );
 
   const $updateToolbar = useCallback(() => {
@@ -80,7 +80,7 @@ export function Toolbar() {
         setActiveEditor(newEditor);
         return false;
       },
-      COMMAND_PRIORITY_CRITICAL
+      COMMAND_PRIORITY_CRITICAL,
     );
   }, [editor, $updateToolbar]);
 
@@ -93,7 +93,7 @@ export function Toolbar() {
         editorState.read(() => {
           $updateToolbar();
         });
-      })
+      }),
     );
   }, [$updateToolbar, activeEditor, editor]);
 

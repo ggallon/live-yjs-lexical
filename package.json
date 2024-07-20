@@ -6,6 +6,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "format": "pnpm biome format --write .",
     "update-deps": "pnpm update --interactive --latest"
   },
   "dependencies": {
