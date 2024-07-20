@@ -10,11 +10,21 @@ import {
 } from "lexical";
 import { useCallback, useEffect, useState } from "react";
 
-import { BoldIcon, ItalicIcon, UnderlineIcon } from "@/components/icons/format";
+import {
+  BoldIcon,
+  ItalicIcon,
+  StrikethroughIcon,
+  UnderlineIcon,
+} from "@/components/icons/format";
 
 import styles from "./Toolbar.module.css";
 
-function getTextFormatting(bold: boolean, italic: boolean, underline: boolean) {
+function getTextFormatting(
+  bold: boolean,
+  italic: boolean,
+  strikethrough: boolean,
+  underline: boolean
+) {
   const styleArray: Array<string> = [];
   if (bold) {
     styleArray.push("bold");
@@ -22,6 +32,10 @@ function getTextFormatting(bold: boolean, italic: boolean, underline: boolean) {
 
   if (italic) {
     styleArray.push("italic");
+  }
+
+  if (strikethrough) {
+    styleArray.push("strikethrough");
   }
 
   if (underline) {
@@ -37,9 +51,15 @@ export function Toolbar() {
   const [activeEditor, setActiveEditor] = useState(editor);
   const [isBold, setIsBold] = useState(false);
   const [isItalic, setIsItalic] = useState(false);
+  const [isStrikethrough, setIsStrikethrough] = useState(false);
   const [isUnderline, setIsUnderline] = useState(false);
   const [isEditable, setIsEditable] = useState(() => editor.isEditable());
-  const textFormatting = getTextFormatting(isBold, isItalic, isUnderline);
+  const textFormatting = getTextFormatting(
+    isBold,
+    isItalic,
+    isStrikethrough,
+    isUnderline
+  );
 
   const $updateToolbar = useCallback(() => {
     const selection = $getSelection();
@@ -47,6 +67,7 @@ export function Toolbar() {
       // Update text format
       setIsBold(selection.hasFormat("bold"));
       setIsItalic(selection.hasFormat("italic"));
+      setIsStrikethrough(selection.hasFormat("strikethrough"));
       setIsUnderline(selection.hasFormat("underline"));
     }
   }, [activeEditor]);
@@ -59,7 +80,7 @@ export function Toolbar() {
         setActiveEditor(newEditor);
         return false;
       },
-      COMMAND_PRIORITY_CRITICAL,
+      COMMAND_PRIORITY_CRITICAL
     );
   }, [editor, $updateToolbar]);
 
@@ -72,7 +93,7 @@ export function Toolbar() {
         editorState.read(() => {
           $updateToolbar();
         });
-      }),
+      })
     );
   }, [$updateToolbar, activeEditor, editor]);
 
@@ -123,6 +144,18 @@ export function Toolbar() {
           value="underline"
         >
           <UnderlineIcon />
+        </ToolbarUI.ToggleItem>
+        <ToolbarUI.ToggleItem
+          disabled={!isEditable}
+          className={styles.button}
+          onClick={() => {
+            activeEditor.dispatchCommand(FORMAT_TEXT_COMMAND, "strikethrough");
+          }}
+          aria-label="Format text to strikethrough."
+          aria-pressed={isStrikethrough}
+          value="strikethrough"
+        >
+          <StrikethroughIcon />
         </ToolbarUI.ToggleItem>
       </ToolbarUI.ToggleGroup>
     </ToolbarUI.Root>

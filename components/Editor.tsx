@@ -34,7 +34,9 @@ const initialConfig = {
     text: {
       bold: styles.textBold,
       italic: styles.textItalic,
+      strikethrough: styles.textStrikethrough,
       underline: styles.textUnderline,
+      underlineStrikethrough: styles.textUnderlineStrikethrough,
     },
     paragraph: styles.paragraph,
   },
