@@ -5,7 +5,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "pnpm biome lint --error-on-warnings .",
     "format": "pnpm biome format --write .",
     "update-deps": "pnpm update --interactive --latest"
   },
