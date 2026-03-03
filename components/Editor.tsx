@@ -1,5 +1,6 @@
 "use client";
 
+import { LexicalCollaboration } from "@lexical/react/LexicalCollaborationContext";
 import { CollaborationPlugin } from "@lexical/react/LexicalCollaborationPlugin";
 import { LexicalComposer } from "@lexical/react/LexicalComposer";
 import { ContentEditable } from "@lexical/react/LexicalContentEditable";
@@ -73,36 +74,38 @@ export default function Editor() {
       const doc = getDocFromMap(id, yjsDocMap);
       return new LiveblocksYjsProvider(room, doc) as Provider;
     },
-    [room],
+    [room]
   );
 
   return (
     <div className={styles.container}>
-      <LexicalComposer initialConfig={initialConfig}>
-        <div className={styles.editorHeader}>
-          <Toolbar />
-          <Avatars />
-        </div>
-        <div className={styles.editorContainer}>
-          <RichTextPlugin
-            contentEditable={
-              <ContentEditable id="note-content" className={styles.editor} />
-            }
-            placeholder={
-              <p className={styles.placeholder}>Start typing here…</p>
-            }
-            ErrorBoundary={LexicalErrorBoundary}
-          />
-          <CollaborationPlugin
-            id="yjs-plugin"
-            cursorColor={userInfo.color}
-            username={userInfo.name}
-            providerFactory={providerFactory}
-            initialEditorState={initialEditorState}
-            shouldBootstrap={true}
-          />
-        </div>
-      </LexicalComposer>
+      <LexicalCollaboration>
+        <LexicalComposer initialConfig={initialConfig}>
+          <div className={styles.editorHeader}>
+            <Toolbar />
+            <Avatars />
+          </div>
+          <div className={styles.editorContainer}>
+            <RichTextPlugin
+              contentEditable={
+                <ContentEditable id="note-content" className={styles.editor} />
+              }
+              placeholder={
+                <p className={styles.placeholder}>Start typing here…</p>
+              }
+              ErrorBoundary={LexicalErrorBoundary}
+            />
+            <CollaborationPlugin
+              id="yjs-plugin"
+              cursorColor={userInfo.color}
+              username={userInfo.name}
+              providerFactory={providerFactory}
+              initialEditorState={initialEditorState}
+              shouldBootstrap={true}
+            />
+          </div>
+        </LexicalComposer>
+      </LexicalCollaboration>
     </div>
   );
 }
